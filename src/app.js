@@ -1,10 +1,15 @@
 import express from 'express';
+import getRates from './utils/rates.js';
 
 const app = express()
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/rates', async (req, res) => {
+  const base = req.query.base;
+  const amount = req.query.amount;
+  const result = await getRates(base, amount);
+
+  res.status(result.code).json(result.data);
 })
 
 app.listen(port, () => {

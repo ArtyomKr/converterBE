@@ -1,25 +1,18 @@
-import https from 'https';
+import fetchGet from './fetchGet.js';
 
-const options = {
-  hostname: 'api.exchanrate.host',
-  port: 443,
-  path: '/latest?base=USD',
-  method: 'GET',
-};
+async function getRates(base = 'USD', amount = 1) {
+  const options = {
+    hostname: 'api.exchangerate.host',
+    path: `/latest?base=${base}&amount=${amount}`,
+  };
 
-let getRates = new Promise((resolve, reject) => {
-  let response = ''
+  try {
+    const res = await fetchGet(options);
+    if (res.code === 200) return { code: res.code, data: res.body.rates };
+    else return { code: res.code, data: `An API error has occurred. Status code: ${res.code}` };
+  } catch (err) {
+    return { code: 500, data: err.message };
+  }
+}
 
-  const req = https.get(options, (res) => {
-    res.on('data', chunk => {
-      response += chunk;
-    });
-    res.on('end', () => resolve(response));
-  })
-
-  req.on('error', err => reject(err));
-  req.end();
-})
-  
-
-getRates.then(res => console.log(res)).catch(err => console.log(err));
+export default getRates;
