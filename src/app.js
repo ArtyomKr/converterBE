@@ -1,7 +1,7 @@
 import express from 'express';
-import getRates from './utils/rates.js';
+import getRates from './utils/getRates.js';
 
-const app = express()
+const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/rates', async (req, res) => {
@@ -13,5 +13,5 @@ app.get('/rates', async (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`)
+  console.log(`Server is running on port: ${port}`);
 })
