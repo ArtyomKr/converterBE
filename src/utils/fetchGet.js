@@ -5,7 +5,7 @@ function fetchGet(options) {
   options.port = 443;
 
   return new Promise((resolve, reject) => {
-    let response = ''
+    let response = '';
 
     const req = https.get(options, (res) => {
       res.on('data', chunk => {

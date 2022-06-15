@@ -1,4 +1,5 @@
 import fetchGet from './fetchGet.js';
+import trimRates from './trimRates.js';
 
 async function getRates(base = 'USD', amount = 1) {
   const options = {
@@ -8,7 +9,7 @@ async function getRates(base = 'USD', amount = 1) {
 
   try {
     const res = await fetchGet(options);
-    if (res.code === 200) return { code: res.code, data: res.body.rates };
+    if (res.code === 200) return { code: res.code, data: trimRates(res.body.rates) };
     else return { code: res.code, data: `An API error has occurred. Status code: ${res.code}` };
   } catch (err) {
     return { code: 500, data: err.message };
