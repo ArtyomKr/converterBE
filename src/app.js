@@ -1,5 +1,5 @@
 import express from 'express';
-import getRates from './utils/getRates.js';
+import getRates from './requests/getRates.js';
 
 const app = express();
 const port = process.env.PORT || 3000;

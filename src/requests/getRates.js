@@ -1,5 +1,5 @@
-import fetchGet from './fetchGet.js';
-import trimRates from './trimRates.js';
+import fetchGet from '../utils/fetchGet.js';
+import trimRates from '../utils/trimRates.js';
 
 async function getRates(base = 'USD', amount = 1) {
   const options = {
